@@ -1,0 +1,3 @@
+unedited imgs go here
+
+directory will be used for storage for imgs. they will be preprocessed, have edges of bills detected, then cropped to those edges. output is cropped
