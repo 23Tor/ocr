@@ -38,7 +38,7 @@ for pt in zip(*loc[::-1]):
 
 cv.imwrite('output/bill1_output.png', img_rgb)
 ```
-![Bill 1 Output](output/bill1_output.png)
+![Bill 1 Output](readme_files/bill1_output.png)
 
 Using the template from bill1 and attempting to match it to bill2 and so on was definitely not going to work, so I started looking into combing opencv with tesseract
 
@@ -70,7 +70,7 @@ plt.title(f'Bill {i} Cropped')
 plt.show()
 ```
 
-![Bill 1 Serial output](output/serial_plot.png)
+![Bill 1 Serial output](readme_files/serial_plot.png)
 ```
 Bill 2: D05202986G
 ```
@@ -83,11 +83,11 @@ Before writing scripts I like to breakdown the process in a notebook, so I creat
 
 At first I used a real picture of one of my bills, but I made the mistake of taking the picture on the back of my Children of Dune book, which has three circles engraved into the hardback cover. It technically did crop to the edges, but it picked up the circles so it's not to the bill
 
-![Dune book bill](output/real_bill_plot.png)
+![Dune book bill](readme_files/real_bill_plot.png)
 
 I went online and found a decent test image for some vintage bill so I used that instead and found better results
 
-![Real Bill 2](output/real_bill_2_plot.png)
+![Real Bill 2](readme_files/real_bill_2_plot.png)
 ## Future Endeavors
 
 * Automatic cropping
