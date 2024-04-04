@@ -3,14 +3,14 @@ import numpy as np
 import os
 
 # count number of images
-path = "precrop"
+path = "source_img/precrop"
 files = os.listdir(path)
 num_bills = len(files)
 
 # read images
 for i in range(1, num_bills + 1):
     # read img
-    img = cv.imread(f"precrop/{i}.jpg")
+    img = cv.imread(f"source_img/precrop/{i}.jpg")
     assert img is not None, f"Image {i} was not read"
 
     # find edges
@@ -23,4 +23,4 @@ for i in range(1, num_bills + 1):
 
     # crop img to those points
     cropped_img = img[y1:y2, x1:x2]
-    cv.imwrite(f"cropped/{i}.jpg", cropped_img)
+    cv.imwrite(f"source_img/cropped/{i}.jpg", cropped_img)
