@@ -26,4 +26,4 @@ for file in files:
 
     # file basename
     filename = os.path.basename(file)
-    cv.imwrite(f"source_img/cropped/{filename}.jpg", cropped_img)
+    cv.imwrite(f"source_img/cropped/{filename}", cropped_img)
