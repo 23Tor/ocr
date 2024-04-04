@@ -82,7 +82,10 @@ I used Bill 2 as this example because Bill 1 kept mistakenly adding another 6 at
 * Automatic cropping
 * Data storage
 * API data lookup
+* Analytics with R
 
 The images will be taken manually (and hopefully with the help of a friend), so they're not going to be perfectly aligned or uniform, so I want to see if I can automate the process of cropping. I setup a directory called `source_img` with subdirectories `precrop` and `cropped`. The raw images will go into precrop and then I'll run a script that detects the edges and crops the image around the bill
 
 I need to store the serial numbers in a light weight database. Later I'll try to find an API where I can programmatically lookup things and stuff about the bills like mint date and maybe uniqueness/value of the bill. TBD
+
+After I'm satisfied with the data I want to finally use R to visualize the data. I'm familiar with pandas, matplotlib, seaborn, etc but I've never used R
