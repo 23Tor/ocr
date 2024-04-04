@@ -22,7 +22,7 @@ files = glob.glob(os.path.join(path, "*.jpg"))
 try:
     conn = mariadb.connect(
         user="root",
-        password=os.environ.get("bills_db_pass"),
+        password='',
         host="localhost",
         database="bills",
         port=3306
@@ -57,14 +57,16 @@ for file in files:
     img_blur = cv.GaussianBlur(img_gray, (5, 5), 0)
 
     # rescale
-    img_rescaled = cv.resize(img_blur, None, fx=2, fy=2, interpolation=cv.INTER_CUBIC)
+    img_rescaled = cv.resize(img_blur, None, fx=3, fy=3, interpolation=cv.INTER_CUBIC)
+    cv.imwrite("source_img/rescaled.jpg", img_rescaled)
 
     # binarize
     _, img_bin = cv.threshold(img_rescaled, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
+    cv.imwrite("source_img/binarized.jpg", img_bin)
 
     try:
         # extract text
-        config = '--oem 3 --psm 7'
+        config = '--oem 3 --psm 6'
         text = pytesseract.image_to_string(img_bin, config=config)
     
         if text:
