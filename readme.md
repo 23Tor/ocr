@@ -77,6 +77,17 @@ Bill 2: D05202986G
 
 I used Bill 2 as this example because Bill 1 kept mistakenly adding another 6 at the end of the string. I don't expect 100% accuracy but when I do this en masse I'd like to have it be pretty smooth. But for spending a few hours on this, I'm happy with the results so far.
 
+## Edge Detection and Cropping
+
+Before writing scripts I like to breakdown the process in a notebook, so I created edge_detection.ipynb. I loaded the image and used Canny edge detection to make an outline of the edges. I want to crop the image to the edges so I then used numpy to find the min and max x,y values of the edges. I used those values and cropped the image by slicing with the x,y minmax dimensions.
+
+At first I used a real picture of one of my bills, but I made the mistake of taking the picture on the back of my Children of Dune book, which has three circles engraved into the hardback cover. It technically did crop to the edges, but it picked up the circles so it's not to the bill
+
+![Dune book bill](output/real_bill_plot.png)
+
+I went online and found a decent test image for some vintage bill so I used that instead and found better results
+
+![Real Bill 2](output/real_bill_2_plot.png)
 ## Future Endeavors
 
 * Automatic cropping
