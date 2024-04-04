@@ -2,9 +2,7 @@ import cv2 as cv
 import numpy as np
 import os
 
-# count number of files in directory
-import os
-
+# count number of images
 path = "input"
 files = os.listdir(path)
 num_bills = len(files)
