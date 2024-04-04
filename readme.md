@@ -71,6 +71,7 @@ plt.show()
 ```
 
 ![Bill 1 Serial output](readme_files/serial_plot.png)
+
 ```
 Bill 2: D05202986G
 ```
@@ -88,6 +89,15 @@ At first I used a real picture of one of my bills, but I made the mistake of tak
 I went online and found a decent test image for some vintage bill so I used that instead and found better results
 
 ![Real Bill 2](readme_files/real_bill_2_plot.png)
+
+## Database
+
+I chose MariaDB as the database primarily because I've never used it. I'm only really familiar with postgresql so I know my way around SQL pretty well, but I wanted to try a different flavor. I fleshed out `serial_extraction.py` and managed to get the cropped image ran through Tesseract, extract the serial as string and INSERT it into my bills table, so success.
+
+However the serial is innacurate. Tesseract added a random 'u' in the middle so I need to figure out how to either make it more accurate or find something else. I may resort to copilot to generate code but I really only use it for code completion out of fear of over using it as a crutch. This project after all is for learning new things.
+
+![MariaDB](readme_files/mariadb.png)
+
 ## Future Endeavors
 
 * Automatic cropping
