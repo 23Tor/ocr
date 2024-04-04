@@ -1,17 +1,17 @@
 import cv2 as cv
 import numpy as np
 import os
+import glob
 
 # count number of images
 path = "source_img/precrop"
-files = os.listdir(path)
-num_bills = len(files)
+files = glob.glob(os.path.join(path, "*.jpg"))
 
 # read images
-for i in range(1, num_bills + 1):
+for file in files:
     # read img
-    img = cv.imread(f"source_img/precrop/{i}.jpg")
-    assert img is not None, f"Image {i} was not read"
+    img = cv.imread(file)
+    assert img is not None, f"Image {file} was not read"
 
     # find edges
     edges = cv.Canny(img, 100, 200)
@@ -23,4 +23,7 @@ for i in range(1, num_bills + 1):
 
     # crop img to those points
     cropped_img = img[y1:y2, x1:x2]
-    cv.imwrite(f"source_img/cropped/{i}.jpg", cropped_img)
+
+    # file basename
+    filename = os.path.basename(file)
+    cv.imwrite(f"source_img/cropped/{filename}.jpg", cropped_img)
