@@ -3,7 +3,7 @@ import numpy as np
 import os
 
 # count number of images
-path = "input"
+path = "precrop"
 files = os.listdir(path)
 num_bills = len(files)
 
