@@ -98,6 +98,43 @@ However the serial is innacurate. Tesseract added a random 'u' in the middle so 
 
 ![MariaDB](readme_files/mariadb.png)
 
+## EasyOCR Notebook
+
+I figured out the dpi of my cropped images were 96 x 96. The optimal dpi for Tesseract is at least 300, so I started looking into other python OCR libraries. I tried out using a pretrained Tensorflow model but utterly failed. I found EasyOCR and had really good results.
+
+I tested my image on their [demo site](https://www.jaided.ai/easyocr/). I liked the bounding boxes and the display of the probability table so I wanted to emulate that.
+
+I created the easyocr notebook, ran my image through the reader, picked apart the data to see how it was structured, then had copilot generate the plot with all the bounding boxes on it.
+
+The end result is pretty cool
+![easyocr plot](readme_files/easy_ocr_plot.png)
+```
+                           Text  Probability
+17                            3     1.000000
+10                            3     1.000000
+9                             3     1.000000
+7                  C 70244669 A     0.837232
+12                 C 70244669 A     0.781033
+13                            3     0.734737
+8                   WSHINGTONEC     0.686424
+1   ME UNTTEI) STATES OFAMERICA     0.683572
+20                     DEDULLAR     0.377502
+3                         LECAL     0.352041
+16                  Gnet % Yse~     0.247924
+6            Fubiic And PRivaTe     0.164762
+2                          LOTF     0.161385
+15                        52028     0.155480
+4                        TENDER     0.144917
+11                          736     0.099522
+5                     CoRADEKTS     0.030436
+14              Trn @efeo Ieeta     0.005127
+0            HHHEAHFHUEZEDHHOVE     0.001943
+19                    ~fnK{rncI     0.000153
+18                  OtetCnetoca     0.000075
+```
+
+Moving forward I'm going to use EasyOCR. It also gets rid of the edge detection and cropping process. Which kinda hurts my love for rube goldberg machines but at least it's easy and efficient.
+
 ## Future Endeavors
 
 * Automatic cropping :white_check_mark:
