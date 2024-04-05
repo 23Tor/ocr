@@ -106,6 +106,21 @@ I tested my image on their [demo site](https://www.jaided.ai/easyocr/). I liked 
 
 I created the easyocr notebook, ran my image through the reader, picked apart the data to see how it was structured, then had copilot generate the plot with all the bounding boxes on it.
 
+```python
+# setup reader
+reader = easyocr.Reader(['en'])
+
+#setup image
+image_path ='input/real_bill.jpg'
+image = mpimg.imread(image_path)
+
+# read text in image, check data structure
+result = reader.readtext(image)
+display(result)
+
+# >>>matplotlib ai code here<<<
+```
+
 The end result is pretty cool
 ![easyocr plot](readme_files/easy_ocr_plot.png)
 ```
