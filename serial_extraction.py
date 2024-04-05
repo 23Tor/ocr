@@ -1,22 +1,27 @@
+import easyocr
 import cv2 as cv
-import pytesseract
 import os
 import glob
 import mariadb
 import sys
+import re
 
-# Tesseract path
-pytesseract.pytesseract.tesseract_cmd = r'C:\Users\tmorton\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
-
-# relative pos of serial num 
-x = 0.618  # horizontal 
-y = 0.28 # vertical 
-w = 0.219  # width 
-h = 0.099  # height 
+# create reader
+reader = easyocr.Reader(['en'])
 
 # files in cropped folder
-path = "source_img/cropped"
+path = "input"
 files = glob.glob(os.path.join(path, "*.jpg"))
+
+# function to find serial number pattern
+def find_serial(results):
+    pattern = r'\b[0-9]{8}\b'
+    for result in results:
+        text = result[1]  # not the bound boxes
+        match = re.findall(pattern, text)
+        if match:
+            return match[0]
+    return None
 
 # connect to db
 try:
@@ -40,42 +45,18 @@ for file in files:
     img = cv.imread(file)
     assert img is not None, "file could not be read, check path"
 
-    # relative pos to absolute pos based on img size
-    height, width = img.shape[:2]
-    x_abs = int(x * width)
-    y_abs = int(y * height)
-    w_abs = int(w * width)
-    h_abs = int(h * height)
+    result = reader.readtext(img)
 
-    # crop
-    img_cropped = img[y_abs:y_abs+h_abs, x_abs:x_abs+w_abs]
+    # extract serial number
+    serial = find_serial(result)
 
-    # to grey
-    img_gray = cv.cvtColor(img_cropped, cv.COLOR_BGR2GRAY)
+    # insert serial number into db
+    if serial:
+        cur.execute("INSERT INTO bills (serial) VALUES (?)", (serial,))
+        conn.commit()
+        print(f"Serial number {serial} inserted into db")
 
-    # add gaussian blur
-    img_blur = cv.GaussianBlur(img_gray, (5, 5), 0)
+# close db connection
+conn.close()
 
-    # rescale
-    img_rescaled = cv.resize(img_blur, None, fx=3, fy=3, interpolation=cv.INTER_CUBIC)
-    cv.imwrite("source_img/rescaled.jpg", img_rescaled)
 
-    # binarize
-    _, img_bin = cv.threshold(img_rescaled, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
-    cv.imwrite("source_img/binarized.jpg", img_bin)
-
-    try:
-        # extract text
-        config = '--oem 3 --psm 6'
-        text = pytesseract.image_to_string(img_bin, config=config)
-    
-        if text:
-            print(text)
-            cur.execute("INSERT INTO bills (serial) VALUES (?)", (text,))
-            conn.commit()
-
-        else:
-            print("No text extracted from image")
-    
-    except Exception as e:
-        print("An error occurred: ", e)
