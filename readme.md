@@ -100,8 +100,8 @@ However the serial is innacurate. Tesseract added a random 'u' in the middle so 
 
 ## Future Endeavors
 
-* Automatic cropping
-* Data storage
+* Automatic cropping :white_check_mark:
+* Data storage :white_check_mark:
 * API data lookup
 * Analytics with R
 
