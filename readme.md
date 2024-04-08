@@ -154,6 +154,7 @@ Moving forward I'm going to use EasyOCR. It also gets rid of the edge detection 
 
 * Automatic cropping :white_check_mark:
 * Data storage :white_check_mark:
+* Streamlined data collection
 * API data lookup
 * Analytics with R
 
