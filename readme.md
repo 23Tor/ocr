@@ -8,6 +8,8 @@ So instead I want to collect all of the serial numbers into a little database, t
 
 I'm mostly doing this for practice and learning more about opencv and OCRs, something I've been really wanting to do!
 
+** I'm basically using this readme as a journal, so that's why it may seem disorderly.
+
 ## OCR Notebook
 
 I started out playing around with Opencv. I started out with reading images and manipulating them to prepare them for recognition
@@ -149,6 +151,10 @@ The end result is pretty cool
 ```
 
 Moving forward I'm going to use EasyOCR. It also gets rid of the edge detection and cropping process. Which kinda hurts my love for rube goldberg machines but at least it's easy and efficient.
+
+## Data Collection with webcam
+
+I knew collecting the data would be a nightmare if I went with the photo route. I still want to have saved images to run through the code I previously wrote, but manually taking those images would take too long. I saw a Redditor's python project on /r/madeinpython that would read live video data to drive an RC car. I think I'm going to try to use the webcam to take a snapshot of the bill in frame, or modify the previous code to insert the serial as it's detected.
 
 ## Future Endeavors
 
